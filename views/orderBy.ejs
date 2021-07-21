@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" href="../css/events.css">
+</head>
+<body>
+    <section id="pageHeader" class="text-center">
+        <%- include('partials/navbar') %>
+        <p class="headingS1">
+            <%=title%>
+        </p>
+    </section>
+    <section id="events">
+            <div class="row ">
+                <% if (eventData.length != 0) { %>
+                    <%for(var i=0; i< eventData.length;i++){ %>
+                        <div class="col-lg-4  text-left">
+                            <div class="card" >
+                                <img src="<%= eventData[i].image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title category"><span class="subHead">Category:</span> <%= eventData[i].event_category %></h5>
+                                <h4 class="card-title head"><%= eventData[i].event_name %></h4>
+                                <h5 class="time"><span class="subHead">Date & Time:</span> <%= eventData[i].date %></h5>
+                                <h5 class="card-text description"><span class="subHead">Description:</span> 
+                                    <% if (eventData[i].description.length > 100) { %>    
+                                        <%= eventData[i].description.substr(0,91) %><a href="/events/<%=eventData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
+                                    <% } else{ %>
+                                        <%= eventData[i].description %>
+                                    <% } %>
+                                </h5>
+                                <a href="/events/<%=eventData[i]._id%>" class="btn headerBtn">Show More</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else{ %>
+                    <h1>
+                        No Event Found
+                    </h1>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    </section>
+<%- include('partials/footer') %>

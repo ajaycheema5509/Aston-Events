@@ -1,0 +1,31 @@
+section .row{
+    padding: 5% 5% 2%;
+    font-size: 130%;
+}
+.row img{
+    width: 80%;
+    margin: 0 auto;
+}
+section .row:last-child{
+    padding: 2% 5% 5%;
+    text-align: right;
+}
+
+@media (max-width:800px){
+    section .row{
+      text-align: center;
+      margin:10% auto ;
+      font-size: 100%;
+    }
+    section .col-lg-9{
+        margin-top: 5%;
+    }
+    section .row:last-child{
+        flex-direction: column-reverse;
+        padding: 2% 5% 5%;
+        text-align: center;
+    }
+    section{
+        width: 100vw;;
+    }
+  }

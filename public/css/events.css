@@ -1,0 +1,107 @@
+#events {
+  padding: 5%;
+}
+#events .col-3 {
+  padding: 0 2%;
+}
+#events .col-3 > div {
+  padding: 3%;
+  font-size: 1.5rem;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 1px 2px 20px -10px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 2px 20px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 20px -10px rgba(0, 0, 0, 0.75);
+}
+#events .dropdown {
+  padding: 0 !important;
+}
+#events .dropdown button,
+#events .dropdown ul {
+  width: 100%;
+  background-color: #fff;
+  color: #000;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+#events .dropdown button{
+    border-radius: 16px !important;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+#events .dropdown button:focus{
+    box-shadow: none !important;
+    -webkit-appearance: none;
+}
+.row .active {
+  background-color: #5d18eb;
+  color: #fff;
+}
+
+.sports{
+  display: block;
+}
+
+.col-lg-4 .card{
+  border: 0 !important;
+}
+
+.culture,.others{
+  display: none;
+}
+
+h1{
+  margin: 5%;
+}
+.eventData .card{
+  width: 100% !important;
+  display: inline-block;
+  text-align: left;
+  border: none;
+  padding: 3%;
+  border: 0;
+}
+.eventData .card img{
+  margin: 2% auto;
+  display: block;
+}
+.date{
+  margin-bottom: 0;
+}
+.card .head,.card .subHead{
+  font-weight: 600;
+}
+.description{
+  text-align: justify;
+}
+.eventData .headerBtn{
+  margin-top: 4%;
+}
+#searchForm{
+  padding: 4% 5% 2%;
+  text-align: center;
+}
+input.form-control{
+  border: none;
+  border-bottom: 1px solid #5D18EB;
+  border-radius: 0;
+  color: #5D18EB;
+  font-size: 1.2rem !important;
+  caret-color: #5D18EB;
+}
+.form-control:focus{
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  border: 0;
+  border-bottom: 2px solid #5D18EB;
+  color: #5D18EB;
+}
+.form-control::placeholder{
+  color :#5D18EB;
+}
+#searchForm .headerBtn{
+  padding: 5%;
+  width: 100%;
+}

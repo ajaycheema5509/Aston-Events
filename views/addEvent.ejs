@@ -1,0 +1,250 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" type="text/css" href="../css/addEvent.css">
+</head>
+<body>
+    <section id="pageHeader" class="text-center">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">Aston Events</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/about">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/events">Events</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/contact">Contact</a>
+                  </li>
+                </ul>
+                <%if (typeof name === 'undefined') { %>
+                  <button id="become_org" class="btn headerBtn" type="button"><a href="/register">Become an Organizer</a></button>
+                  <% } else { %>
+                    <button id="become_org" class="btn headerBtn" type="button"><a href="/logout">Log Out</a></button>
+                <% } %>
+                <!-- <button id="become_org" class="btn headerBtn" type="button"></button> -->
+              </div>
+            </div>
+          </nav>
+        <p class="headingS1">
+            Hi <%= name %>
+        </p>
+    </section>
+    <%if (errors.message != undefined) { %>
+        <div class="text-center">
+            <p class="error">
+                <%= errors.message %>
+            </p>
+        </div>
+    <% } else if (errors.length != 0) { %>
+        <div class="text-center">
+            <%for(var i=0; i< errors.length;i++){ %>
+                <p class="error">
+                    <%= errors[i].msg %>
+                </p>
+            <% } %>
+        </div>
+    <% } %>
+    <section id="dashboard">
+        <div class="row text-center">
+            <div class="col-lg-6" >
+                <p id="addEvent" class="active" onclick="active(this)">
+                    Add an Event
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <p id="myEvent" onclick="active(this)">
+                    My Event
+                </p>
+            </div>
+        </div>
+        <div class="addEvent">
+            <h1 class="text-center">Add an Event</h1>
+            <form action="/eventDashboard/<%=id%>" method="post" enctype="multipart/form-data">
+                <input type="text" value="<%=id%>" name="id" hidden id="id">
+                <input type="text" value="<%=name%>" name="username" hidden id="username">
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <i class="fas fa-hashtag "></i>
+                    </div>
+                    <div class="col-11">
+                        <select name="event_category" class="form-control" id="event_category">
+                            <option value="Sport">Sport</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <i class="fas fa-signature "></i>
+                    </div>
+                    <div class="col-11">
+                        <input type="text" class="form-control" placeholder="Enter Name of the Event" name="event_name" id="event_name">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <i class="fas fa-calendar-day "></i>
+                    </div>
+                    <div class="col-11">
+                        <input type="datetime-local" class="form-control" placeholder="Enter Date of the Event" name="date" id="date">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <i class="fas fa-map-marked-alt "></i>
+                    </div>
+                    <div class="col-11">
+                        <input type="text" class="form-control" placeholder="Enter Place of the Event" name="location" id="location">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <i class="fas fa-image "></i>
+                    </div>
+                    <div class="col-11">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                               <h5>Enter Image for the Event</h5>
+                            </div>
+                            <div class="col-8">
+                                <input type="file" accept=".png, .jpeg, .jpg" class="form-control" placeholder="" name="image" id="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <i class="fas fa-info-circle "></i>
+                    </div>
+                    <div class="col-11">
+                        <textarea name="description" id="description" cols="30" rows="10" placeholder="Enter Description of the Event"></textarea>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit " class="btn headerBtn btn-lg">Add Event </button>
+                </div>
+            </form>
+        </div>
+        <div class="myEvent">
+            <h1 class="text-center">
+                My Events
+            </h1>
+            <div class="row">
+                <%for(var i=0; i< eventData.length;i++){ %>
+                    <div class="col-lg-4">
+                        <div class="card" >
+                            <img src="<%= eventData[i].image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title category"><span class="subHead">Category:</span> <%= eventData[i]._doc.event_category %></h5>
+                            <h4 class="card-title head"><%= eventData[i]._doc.event_name %></h4>
+                            <h5 class="date"><span class="subHead">Date & Time:</span> <%= eventData[i]._doc.date %></h5>
+                            <h5 class="card-text description"><span class="subHead">Description:</span>
+                                <% if (eventData[i]._doc.description.length > 100) { %>    
+                                    <%= eventData[i]._doc.description.substr(0,91) %><a href="/events/<%=eventData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
+                                <% } else{ %>
+                                    <%= eventData[i]._doc.description %>
+                                <% } %>
+                            </h5>
+                            <button class="btn headerBtn" value="<%=eventData[i]._id%>" onclick="setValue(this)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <div class="addEvent">
+            <form action="" id="editForm" method="post">
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <input type="text" value="<%=id%>" name="id" hidden id="id">
+                            <input type="text" value="<%=name%>" name="username" hidden id="username">
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <i class="fas fa-hashtag "></i>
+                                </div>
+                                <div class="col-11">
+                                    <select name="event_category" class="form-control" id="event_category">
+                                        <option value="Sport">Sport</option>
+                                        <option value="Culture">Culture</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <i class="fas fa-signature "></i>
+                                </div>
+                                <div class="col-11">
+                                    <input type="text" required class="form-control" placeholder="Enter Name of the Event" name="event_name" id="event_name">
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <i class="fas fa-calendar-day "></i>
+                                </div>
+                                <div class="col-11">
+                                    <input type="datetime-local" required class="form-control" placeholder="Enter Date of the Event" name="date" id="date">
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <i class="fas fa-map-marked-alt "></i>
+                                </div>
+                                <div class="col-11">
+                                    <input type="text" class="form-control" required placeholder="Enter Place of the Event" name="location" id="location">
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <i class="fas fa-image "></i>
+                                </div>
+                                <div class="col-11">
+                                    <div class="row align-items-center">
+                                        <div class="col-4">
+                                           <h5>Enter Image for the Event</h5>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="file" accept=".png, .jpeg, .jpg"  class="form-control" placeholder="" name="image" id="image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <i class="fas fa-info-circle "></i>
+                                </div>
+                                <div class="col-11">
+                                    <textarea name="description" id="description" required cols="30" rows="10" placeholder="Enter Description of the Event"></textarea>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn headerBtn">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </section>
+    <script src="../js/eventDashboard.js"></script>
+<%- include('partials/footer') %>

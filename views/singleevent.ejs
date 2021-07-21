@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" href="../css/singleevent.css">
+</head>
+<body>
+    <section id="pageHeader" class="text-center">
+        <%- include('partials/navbar') %>
+        <p class="headingS1">
+            <%= result._doc.event_name %>
+        </p>
+    </section>
+    <section id="eventDetails">
+        <div class="card">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="<%= result._doc.image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4 class="card-title category"><span class="subHead">Category:</span> <%= result._doc.event_category %></h4>
+                        <h3 class="card-title head"><%= result._doc.event_name %></h3>
+                        <h4 class="date"><span class="subHead">Date & Time:</span> <%= result._doc.date %></h4>
+                        <h4 class="venue"><span class="subHead">Venue:</span> <%= result._doc.location %></h4>
+                        <h4 class="card-text description"><span class="subHead">Description:</span> <%= result._doc.description %></h4>
+                        <h4 class="name"><span class="subHead">Organiser Name:</span> <%= host %></h4>
+                        <h4 class="email"><span class="subHead">Organiser Email:</span> <%= email %></h4>
+                        <h4 class="rank"><span class="subHead">Interest Ranking:</span> <span id="like"><%= result._doc.__v %></span></h4>
+                        <button type="submit" value="<%=result._doc._id%>" id="subBtn" class="btn headerBtn" onclick="like(this)">Yes</button></form>
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+    <script src="./../js/singleevent.js"></script>
+<%- include('partials/footer') %>

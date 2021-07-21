@@ -1,0 +1,57 @@
+section .row{
+    color: #5D18EB;
+    margin: 5% 10%;
+    font-size: 130%;
+}
+.col-2.userIcon{
+    font-size: 15rem;
+}
+.col-2{
+    text-align: right;
+    padding-right: 3%;
+}
+ input.form-control,textarea{
+    border: none ;
+    border-bottom: 1px solid #5D18EB ;
+    border-radius: 0 ;
+    color: #5D18EB ;
+    font-size: 1.2rem ;
+    caret-color: #5D18EB ;
+}
+.form-control:focus,textarea:focus-visible{
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    border-bottom: 2px solid #5D18EB ;
+    color: #5D18EB ;
+    outline: 0;
+}
+.form-control::placeholder,textarea::placeholder{
+    color :#5D18EB ;
+}
+.col-10{
+    text-align: center;
+}
+textarea{
+    width: 100%;
+    resize: none;
+    padding: 2%;
+}
+.col-10{
+    text-align: left;
+}
+@media (max-width:800px){
+    .col-2.userIcon{
+        display: none;
+    }
+    section .row{
+        color: #5D18EB;
+        margin: 5% 2%;
+        font-size: 110%;
+    }
+}
+@media (max-width:480px){
+    section .row{
+        margin: 10% 2%;
+        font-size: 100%;
+    }
+}

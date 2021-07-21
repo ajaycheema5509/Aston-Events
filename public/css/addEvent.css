@@ -1,0 +1,120 @@
+.myEvent{
+    display: none;
+    padding: 5%;
+}
+.addEvent{
+    display: block;
+}
+#dashboard .col-lg-6{
+    padding: 2% 10%;
+}
+.row .active {
+    background-color: #5d18eb;
+    color: #fff;
+  }
+#dashboard .row p{
+  padding: 3%;
+  font-size: 1.5rem;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 1px 2px 20px -10px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 2px 20px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 20px -10px rgba(0, 0, 0, 0.75);
+}
+.addEvent form{
+    padding: 0 5% 5%;
+}
+.addEvent form .col-1{
+    text-align: right;
+    padding-right: 2%;
+}
+h1{
+    margin-bottom: 2%;
+    color: #5d18eb;
+    font-weight: 600;
+}
+
+.addEvent form .row{
+    margin: 2%  0;
+    color: #5d18eb;
+}
+.addEvent textarea{
+    width: 100%;
+    resize: none;
+}
+.addEvent input,.addEvent textarea{
+    border: none;
+    border-bottom: 1px solid #5D18EB;
+    border-radius: 0;
+    color: #5D18EB;
+    font-size: 1.2rem !important;
+    caret-color: #5D18EB;
+}
+.addEvent input[type=file]{
+    border: 1px solid #5D18EB;
+}
+.form-control:focus,.addEvent textarea:focus-visible{
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    border: 0;
+    border-bottom: 2px solid #5D18EB;
+    color: #5D18EB;
+}
+.form-control::placeholder,.addEvent textarea::placeholder{
+    color :#5D18EB;
+}
+select.form-control{
+  border: 1px solid #5D18EB;
+  color: #5D18EB;
+  border-bottom: 1px solid #5D18EB;
+}
+select.form-control:focus{
+  border: 1px solid #5D18EB;
+  color: #5D18EB;
+  border-bottom: 2px solid #5D18EB;
+}
+.addEvent textarea{
+    padding: 1%;
+    outline: none;
+}
+.addEvent .col-1 i{
+    font-size: 1.5rem !important;
+}
+input[type=time]::-webkit-calendar-picker-indicator {
+   filter: #5D18EB;
+}
+.myEvent .card{
+    width: 100% !important;
+    display: inline-block;
+    text-align: left;
+    border: none;
+    padding: 3%;
+  }
+  .myEvent .card img{
+    margin: 2% auto;
+    display: block;
+  }
+  .date{
+    margin-bottom: 0;
+  }
+  .card .head,.card .subHead{
+    font-weight: 600;
+  }
+  .description{
+    text-align: justify;
+  }
+  .addEvent h5{
+    margin-bottom: 0;
+    text-align: center;
+  }
+  .addEvent .modal-dialog{
+    color: #5d18eb;
+    max-width: 80% !important;
+  }
+  .addEvent .btn-secondary{
+    padding: 1% 3%;
+    margin:auto 2%;
+    border-radius: 48px;
+    font-size: 1.25rem;
+  }

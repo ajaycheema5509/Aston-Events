@@ -1,0 +1,63 @@
+.register{
+    padding: 5%;
+}
+
+.register img{
+    width: 45vw;
+    margin-left: 5%;
+}
+.register.row{
+    padding: 5%;
+}
+
+.register .loginData{
+    display: block;
+}
+.register .registerData{
+    display: none;
+}
+.register .regHead{
+    background-color: #ddd;
+    cursor: pointer;
+    padding:2% 0;
+    border-top: solid 3px #ddd;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.register .active{
+    background-color: #fff;
+    border-top: solid 3px #5D18EB;
+}
+.register form .row{
+    color: #5D18EB;
+    margin: 5% auto;
+}
+.registerData .row{
+    margin: 3% auto;
+}
+.register form .col-2{
+    text-align: right;
+}
+.register input{
+    border: none;
+    border-bottom: 1px solid #5D18EB;
+    border-radius: 0;
+    color: #5D18EB;
+    font-size: 1.2rem !important;
+    caret-color: #5D18EB;
+}
+.form-control:focus{
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    border-bottom: 2px solid #5D18EB;
+    color: #5D18EB;
+}
+.form-control::placeholder{
+    color :#5D18EB;
+}
+.loginData .headerBtn{
+    margin-top: 5%;
+}
+.col-2 i{
+    font-size: 1.5rem !important;
+}

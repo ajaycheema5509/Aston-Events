@@ -1,0 +1,90 @@
+<%- include('partials/header') %>
+  <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<body>
+<section id="header">
+<%- include('partials/navbar') %>
+  <div class="text-center headerDiv">
+    <p class="headingS1">Participate in the events & win prizes</p>
+    <p class="subHeading">Choose from 20+ different events like music, football, etc</p>
+    <button class="btn headerBtn" type="button"><a href="/events">Explore Events</a></button>
+  </div>
+</section>
+<section id="section2">
+  <p class="heading">
+    Winning or Losing, Doesn’t Matter,<br/>Participation Matters!
+  </p>
+</section>
+<section id="events">
+  <p class="heading">
+    Event Categories
+  </p>
+  <div class="row">
+    <div class="col-lg-4 eventRow">
+      <a href="/events">
+        <img src="../assets/section-2-card-1.png" alt="Sports">
+        <p class="cardHeading text-center">Sports</p>
+      </a>
+    </div>
+    <div class="col-lg-4 eventRow">
+      <a href="/events#culture">
+        <img src="../assets/section-2-card-2.png" alt="Culture">
+        <p class="cardHeading text-center">Culture</p>
+      </a>
+    </div>
+    <div class="col-lg-4 eventRow">
+      <a href="/events#others">
+        <img src="../assets/section-2-card-3.png" alt="Others">
+        <p class="cardHeading text-center">Others</p>
+      </a>
+    </div>
+  </div>
+</section>
+<section id="popularEvents">
+  <p class="heading">
+    Popular Events
+  </p>
+  <div class="row ">
+    <% if (eventData.length != 0) { %>
+        <%for(var i=0; i< length;i++){ %>
+            <div class="col-lg-4  text-left">
+                <div class="card" >
+                    <img src="<%= eventData[i].image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title category"><span class="subHead">Category:</span> <%= eventData[i].event_category %></h5>
+                    <h4 class="card-title head"><%= eventData[i].event_name %></h4>
+                    <h5 class="time"><span class="subHead">Date & Time:</span> <%= eventData[i].date %></h5>
+                    <h5 class="card-text description"><span class="subHead">Description:</span> 
+                        <% if (eventData[i].description.length > 100) { %>    
+                            <%= eventData[i].description.substr(0,91) %><a href="/events/<%=eventData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
+                        <% } else{ %>
+                            <%= eventData[i].description %>
+                        <% } %>
+                    </h5>
+                    <a href="/events/<%=eventData[i]._id%>" class="btn headerBtn">Show More</a>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <% } else{ %>
+        <h1>
+            No Event Found
+        </h1>
+    <% } %>
+</div>
+</section>
+<section id="explore">
+  <button class="btn headerBtn" type="button"><a href="/events">Explore More Events</a></button>
+</section>
+<section id="becomeOrganizer">
+<%if (typeof name === 'undefined') { %>
+    <p class="heading">Become an organiser to<br> organise an event</p>
+    <p class="subHeading">Organise an event and become<br> a part of this great Event</p>
+    <button class="btn headerBtn" type="button"><a href="/register">Become an Organizer</a></button>
+  <% } else { %>
+    <p class="heading">Go to your Account</p>
+    <button id="become_org" class="btn headerBtn" type="button"><a href="/eventDashboard">My Account</a></button>
+<% } %>
+</section>
+
+<%- include('partials/footer') %>

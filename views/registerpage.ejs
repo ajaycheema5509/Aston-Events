@@ -1,0 +1,99 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" href="/css/registerpage.css">
+</head>
+<body>
+<section id="pageHeader" class="text-center">
+    <%- include('partials/navbar') %>
+    <p class="headingS1">
+        Login/Register
+    </p>
+</section>
+<%if (info.message != undefined) { %>
+    <div class="text-center">
+        <p class="error">
+            <%= info.message %>
+        </p>
+    </div>
+<% } else if (info.length != 0) { %>
+    <div class="text-center">
+        <%for(var i=0; i< info.length;i++){ %>
+            <p class="error">
+                <%= info[i].msg %>
+            </p>
+        <% } %>
+    </div>
+<% } %>
+<div class="row register align-items-center">
+    <div class="col-lg-8">
+        <img src="../assets/undraw_authentication_fsn5.svg" alt="Login Svg">
+    </div>
+    <div class="col-lg-4 text-center">
+        <div class="row">
+            <div class="col-lg-6 active regHead" id="loginC" onclick="active(this)">Login</div>
+            <div class="col-lg-6 regHead" id="registerC" onclick="active(this)">Signup</div>
+        </div>
+        <div class="loginData">
+            <form method="post" action="/login">
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fas fa-signature "></i>
+                    </div>
+                    <div class="col-10">
+                        <input type="text" class="form-control" placeholder="Enter Username" name="username" id="username">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fas fa-key "></i>
+                    </div>
+                    <div class="col-10">
+                        <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password">
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf" value="<%=csrfToken%>"/>
+                <button type="submit" class="btn headerBtn btn-lg">Submit</button>
+            </form>
+        </div>
+        <div class="registerData">
+            <form method="post" action="/register">
+                <input type="hidden" name="_csrf" value="<%=csrfToken%>"/>
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fas fa-signature "></i>
+                    </div>
+                    <div class="col-10">
+                        <input type="text" class="form-control" placeholder="Enter Name"  name="username" id="username">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fas fa-envelope "></i>
+                    </div>
+                    <div class="col-10">
+                        <input type="email" class="form-control" placeholder="Enter Email Address" name="email" id="email">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fas fa-key "></i>
+                    </div>
+                    <div class="col-10">
+                        <input type="password" class="form-control" placeholder="Enter Password"  name="password" id="password">
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fas fa-check-circle "></i>
+                    </div>
+                    <div class="col-10">
+                        <input type="password" class="form-control"  placeholder="Confirm Password" name="password2" id="password2">
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf" value="<%=csrfToken%>"/>
+                <button type="submit" class="btn headerBtn btn-lg">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../js/register.js"></script>
+<%- include('partials/footer') %>

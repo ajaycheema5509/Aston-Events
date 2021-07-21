@@ -1,0 +1,154 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" href="../css/events.css">
+</head>
+<body onload="onLoading()">
+    <section id="pageHeader" class="text-center">
+        <%- include('partials/navbar') %>
+        <p class="headingS1">
+            All Events
+        </p>
+    </section>
+        <form method="POST"action="/search">
+            <div  id="searchForm" class="row">
+                <div class="col-11">
+                    <input type="text" class="form-control" name="query" id="query" placeholder="Enter Query to Search"/>
+                </div>
+                <div class="col-1">
+                    <button type="submit" class="btn headerBtn btn-lg"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    <section id="events">
+        <div class="row text-center align-items-center">
+            <div class="col-3">
+                <div class="active" id="sports" onclick="active(this)">
+                    Sports
+                </div>
+            </div>
+            <div class="col-3">
+                <div id="culture" onclick="active(this)">
+                    Culture
+                </div>
+            </div>
+            <div class="col-3">
+                <div id="others" onclick="active(this)">
+                    Others
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      Order By
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="/category/alpha">Alphabetical Order</a></li>
+                      <li><a class="dropdown-item" href="/category/upc">Date</a></li>
+                      <li><a class="dropdown-item" href="/category/pop">No of Likes</a></li>
+                    </ul>
+                  </div>
+            </div>
+        </div>
+        <div class="sports">
+            <h1 class=" text-center">
+                Sports
+            </h1>
+            <div class="row ">
+                <% if (sportData.length != 0) { %>
+                    <%for(var i=0; i< sportData.length;i++){ %>
+                        <div class="col-lg-4  text-left">
+                            <div class="card" >
+                                <img src="<%= sportData[i].image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title category"><span class="subHead">Category:</span> <%= sportData[i]._doc.event_category %></h5>
+                                <h4 class="card-title head"><%= sportData[i]._doc.event_name %></h4>
+                                <h5 class="time"><span class="subHead">Date & Time:</span> <%= sportData[i]._doc.date %></h5>
+                                <h5 class="card-text description"><span class="subHead">Description:</span> 
+                                    <% if (sportData[i]._doc.description.length > 100) { %>    
+                                        <%= sportData[i]._doc.description.substr(0,91) %><a href="/events/<%=sportData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
+                                    <% } else{ %>
+                                        <%= sportData[i]._doc.description %>
+                                    <% } %>
+                                </h5>
+                                <a href="/events/<%=sportData[i]._id%>" class="btn headerBtn">Show More</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else{ %>
+                    <h1>
+                        No Event Found
+                    </h1>
+                <% } %>
+            </div>
+        </div>
+        <div class="culture">
+            <h1 class=" text-center">
+                Culture
+            </h1>
+            <div class="row ">
+                <% if (cultureData.length != 0) { %>
+                    <%for(var i=0; i< cultureData.length;i++){ %>
+                        <div class="col-lg-4 text-left">
+                            <div class="card" >
+                                <img src="<%= cultureData[i].image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title category"><span class="subHead">Category:</span> <%= cultureData[i]._doc.event_category %></h5>
+                                <h4 class="card-title head"><%= cultureData[i]._doc.event_name %></h4>
+                                <h5 class="date"><span class="subHead">Date:</span> <%= cultureData[i]._doc.date %></h5>
+                                <h5 class="time"><span class="subHead">Time:</span> 11:30 AM</h5>
+                                <h5 class="card-text description"><span class="subHead">Description:</span>
+                                    <% if (cultureData[i]._doc.description.length > 100) { %>    
+                                        <%= cultureData[i]._doc.description.substr(0,91) %><a href="/events/<%=cultureData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
+                                    <% } else{ %>
+                                        <%= cultureData[i]._doc.description %>
+                                    <% } %>
+                                </h5>
+                                <a href="/events/<%=cultureData[i]._id%>" class="btn headerBtn">Show More</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else{ %>
+                    <h1>
+                        No Event Found
+                    </h1>
+                <% } %>
+            </div>
+        </div>
+        <div class="others">
+            <h1 class=" text-center">
+                Others
+            </h1>
+            <div class="row ">
+                <% if (othersData.length != 0) { %>
+                    <%for(var i=0; i< othersData.length;i++){ %>
+                        <div class="col-lg-4  text-left">
+                            <div class="card" >
+                                <img src="<%= othersData[i].image || '../assets/section-2-card-1.png' %>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title category"><span class="subHead">Category:</span> <%= othersData[i]._doc.event_category %></h5>
+                                <h4 class="card-title head"><%= othersData[i]._doc.event_name %></h4>
+                                <h5 class="date"><span class="subHead">Date:</span> <%= othersData[i]._doc.date %></h5>
+                                <h5 class="time"><span class="subHead">Time:</span> 11:30 AM</h5>
+                                <h5 class="card-text description"><span class="subHead">Description:</span>
+                                    <% if (othersData[i]._doc.description.length > 100) { %>    
+                                        <%= othersData[i]._doc.description.substr(0,91) %><a href="/events/<%=othersData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
+                                    <% } else{ %>
+                                        <%= othersData[i]._doc.description %>
+                                    <% } %>
+                                </h5>
+                                <a href="/events/<%=othersData[i]._id%>" class="btn headerBtn">Show More</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else{ %>
+                    <h1>
+                        No Event Found
+                    </h1>
+                <% } %>
+        </div>
+    </div>
+    </section>
+    <script src="../js/events.js"></script>
+<%- include('partials/footer') %>
