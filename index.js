@@ -59,8 +59,6 @@ csrfApp.use(bodyParser.json());
 
 csrfApp.use(express.static(path.join(__dirname, "public")));
 
-
-
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
@@ -169,6 +167,7 @@ app.get('/search', async function (req, res) {
   });
 });
 
+// For searching
 app.post("/search", async function (req, res) {
   let name;
   if(typeof req.session.user !== 'undefined' && req.session.user !== null){
