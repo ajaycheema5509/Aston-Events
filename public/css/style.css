@@ -102,7 +102,7 @@ footer .col-lg-4{
 }
 .error{
   font-size: 150%;
-  color: red;
+  color: #f00;
 }
 .readMore{
   color: #5D18EB;
@@ -110,6 +110,13 @@ footer .col-lg-4{
 .readMore:hover{
   color: #370894;
 }
+.headerBtn.btn-danger{
+  background-color: #f00;
+}
+.headerBtn.btn-danger:hover{
+  background-color: rgb(146, 0, 0) !important;
+}
+
 
 @media (max-width:800px){
   footer{

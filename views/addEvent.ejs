@@ -116,7 +116,7 @@
                                <h5>Enter Image for the Event</h5>
                             </div>
                             <div class="col-8">
-                                <input type="file" accept=".png, .jpeg, .jpg" class="form-control" placeholder="" name="image" id="image">
+                                <input type="file" accept=".png, .jpeg, .jpg" class="form-control" placeholder="" name="image" id="image" required>
                             </div>
                         </div>
                     </div>
@@ -140,6 +140,7 @@
                 My Events
             </h1>
             <div class="row">
+                <% if(eventData.length > 0){%>
                 <%for(var i=0; i< eventData.length;i++){ %>
                     <div class="col-lg-4">
                         <div class="card" >
@@ -156,9 +157,13 @@
                                 <% } %>
                             </h5>
                             <button class="btn headerBtn" value="<%=eventData[i]._id%>" onclick="setValue(this)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                            <button type="submit" class="btn btn-danger headerBtn" value="<%=eventData[i]._id%>" onclick="setValueDelete(this)">Delete</button>
                             </div>
                         </div>
                     </div>
+                <% } %>
+                <% }else{ %>
+                    <h1>No Events Created</h1>
                 <% } %>
             </div>
         </div>

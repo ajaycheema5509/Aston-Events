@@ -16,3 +16,9 @@ function active(e){
 function setValue(e) {
     document.getElementById('editForm').action = `/edit/${e.value}`;
 }
+function setValueDelete(e) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", `/delete/${e.value}`, true);
+    xhttp.send();
+    window.location.reload();
+}

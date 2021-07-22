@@ -9,7 +9,7 @@ const passport = require("passport");
 const ejs = require("ejs");
 const config = require("./config/database");
 var port = process.env.PORT || 3000;
-require('dotenv').config();
+require('dotenv').config({ path: "./.env.example"} );
 
 var csrf = require ('csurf');
 var csrfProtection = csrf();
@@ -23,7 +23,12 @@ cloudinary.config({
   api_key: process.env.api_key,
   api_secret: process.env.api_secret,
 });
-mongoose.connect(config.database);
+mongoose.connect(process.env.database, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 let db = mongoose.connection;
 
 db.once("open", function () {
@@ -58,6 +63,8 @@ csrfApp.use(bodyParser.urlencoded({ extended: false }));
 csrfApp.use(bodyParser.json());
 
 csrfApp.use(express.static(path.join(__dirname, "public")));
+
+
 
 app.use(cookieSession({
   name: 'session',
@@ -95,6 +102,10 @@ app.use(
 require("./config/passport")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+function convertTZ(date, tzString) {
+  return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+}
 
 app.get("*", function (req, res, next) {
   res.locals.user = req.user || null;
@@ -167,7 +178,6 @@ app.get('/search', async function (req, res) {
   });
 });
 
-// For searching
 app.post("/search", async function (req, res) {
   let name;
   if(typeof req.session.user !== 'undefined' && req.session.user !== null){
@@ -190,6 +200,7 @@ app.get("/eventDashboard/", async function (req, res) {
   const data = await Event.find({organiser:req.session.id});
   const uData = await User.findById(req.session.id);
   let name;
+  console.log(data);
   if(typeof req.session.user !== 'undefined' && req.session.user !== null){
     name = req.session.user.name;
   res.render("addEvent", {
@@ -207,9 +218,9 @@ app.get("/eventDashboard/", async function (req, res) {
 app.get("/events/:id",async function (req, res) {
   let name;
   if(typeof req.session.user !== 'undefined' && req.session.user !== null){
-    name = req.session.user.username;
+    name = req.session.user.name;
   }
-
+  console.log(req.session.user);
   Event.findById(req.params.id, function (err, result) {
     console.log(result);
     User.findById(result.organiser, function (err, user) {
@@ -217,7 +228,7 @@ app.get("/events/:id",async function (req, res) {
         result: result,
         email: user.email,
         host: user.username,
-        name:name,
+        name: name,
       });
     });
   });
@@ -290,7 +301,7 @@ app.get("/contact", function (req,res) {
 })
 
 app.get("/register",function(req,res,next){
-csrfApp(req,res,next);
+  csrfApp(req,res,next);
 });
 
 
@@ -504,6 +515,16 @@ app.post("/edit/:id", async function (req, res) {
         res.redirect(`/eventDashboard`);
       }});
   }
+});
+
+app.post("/delete/:id", function (req, res) {
+    Event.findByIdAndRemove(req.params.id,function (err) {
+      if (err) {
+        console.log(err);
+      }else{
+        console.log('Deleted');
+      }
+    });
 });
 
 app.get("/events/", function (req, res) {
