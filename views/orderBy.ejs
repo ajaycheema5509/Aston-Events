@@ -18,7 +18,7 @@
                                 <div class="card-body">
                                 <h5 class="card-title category"><span class="subHead">Category:</span> <%= eventData[i].event_category %></h5>
                                 <h4 class="card-title head"><%= eventData[i].event_name %></h4>
-                                <h5 class="time"><span class="subHead">Date & Time:</span> <%= eventData[i].date %></h5>
+                                <h5 class="time"><span class="subHead">Date & Time:</span> <%= eventData[i].date.toString().substr(0,21) %></h5>
                                 <h5 class="card-text description"><span class="subHead">Description:</span> 
                                     <% if (eventData[i].description.length > 100) { %>    
                                         <%= eventData[i].description.substr(0,91) %><a href="/events/<%=eventData[i]._id%>" class="readMore">&nbsp;&nbsp;Read More</a>
