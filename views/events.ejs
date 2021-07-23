@@ -94,7 +94,7 @@
                                 <div class="card-body">
                                 <h5 class="card-title category"><span class="subHead">Category:</span> <%= cultureData[i]._doc.event_category %></h5>
                                 <h4 class="card-title head"><%= cultureData[i]._doc.event_name %></h4>
-                                <h5 class="date"><span class="subHead">Date:</span> <%= cultureData[i]._doc.date.toString().substr(0,24) %></h5>
+                                <h5 class="date"><span class="subHead">Date & Time:</span> <%= cultureData[i]._doc.date.toString().substr(0,24) %></h5>
                                 
                                 <h5 class="card-text description"><span class="subHead">Description:</span>
                                     <% if (cultureData[i]._doc.description.length > 100) { %>    
